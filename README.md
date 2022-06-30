@@ -80,11 +80,11 @@ This process took several hours, but ultimately output a list of predicted means
 
 Below are predictions given by the (1, 1, 2)x(1, 0, 1, 12) model for the 2017-2018 period compared with true values for that same period.
 
-![Top 5 predictions](images/top_five_prediction.png)
+![Top 5 predictions](images/top_5_predictions.png)
 
 And here are the forecasts for the 2018-2019 period:
 
-![Top 5 forecasts](images/top_five_forecasts.png)
+![Top 5 forecasts](images/top_5_forecasts.png)
 
 ### Can the Universal Model be Trusted?
 
