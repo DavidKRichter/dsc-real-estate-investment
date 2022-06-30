@@ -109,7 +109,7 @@ I end the study by evaluating the performance of three methods for predicting RO
 
 1. The universal model, with one set of SARIMA features selected for their performance on twenty different zipcodes
 2. The custom model, with a separate set of SARIMA features for each zipcodes
-3. An simple averaging method, which predicts ROI as the average of the value predicted by the Universal Model and the value predicted by the zipcode's custom model
+3. A simple averaging method, which predicts ROI as the average of the value predicted by the Universal Model and the value predicted by the zipcode's custom model
 
 ### Evaluating the three models
 
