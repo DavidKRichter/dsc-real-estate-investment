@@ -30,7 +30,9 @@ I selected 20 zipcodes for training:
 
 ### EDA Result 1: Limit Training Data to post 2010
 
-For each of the #1 zipcodes in each category, I looked at plots based on each of the four metrics. Plots for ROI First Difference and ROI Second Difference showed a marked difference in patterns after 2010. After this date, the frequency of oscillations in first difference increased, as did the variance of second differences. Since dates before 2010 clearly exhibit patterns that are no longer present in the real estate market, I limited my training data to the post-2010 period.
+For each of the #1 zipcodes in each category, I looked at plots based on each of the four metrics. Plots for ROI First Difference and ROI Second Difference showed a marked difference in patterns after 2010 as we see in the plot for Newark's ROI Second Difference below. After this date, the frequency of oscillations in first difference increased, as did the variance of second differences. Since dates before 2010 clearly exhibit patterns that are no longer present in the real estate market, I limited my training data to the post-2010 period.
+
+![Newark Plots](images/newark_plots.png)
 
 ### EDA Result 2: Near Uniformity of ACF and PCF results
 
@@ -76,6 +78,14 @@ Since I wanted to select zipcodes that balanced high predictions with low risk, 
 
 This process took several hours, but ultimately output a list of predicted means and lower confidence intervals, of which I selected the top 5 for further analysis. For these top five zipcodes the average standard error was 0.32, much greater than the standard error of 0.11 for the twenty zipcodes previously studied. This large error was caused by a single zipcode with a standard error of 1.08. Without this high error zipcode, the model's standard error would have been 0.12. 
 
+Below are predictions given by the (1, 1, 2)x(1, 0, 1, 12) model for the 2017-2018 period compared with true values for that same period.
+
+![Top 5 predictions](images/top_five_prediction.png)
+
+And here are the forecasts for the 2018-2019 period:
+
+![Top 5 forecasts](images/top_five_forecasts.png)
+
 ### Can the Universal Model be Trusted?
 
 Because these five zipcodes were picked out specifically for their high performance on the universal model, we need to determine whether their high predicted ROI values are the result of selection bias or whether modeling on another set of features would be just as likely to produce impressive results.
@@ -83,6 +93,15 @@ Because these five zipcodes were picked out specifically for their high performa
 ### Feature Selection 2: Custom Features
 
 For this group of five zipcodes, I then performed feature selection for each zipcode individually, using grid search on SARIMA features to determine the model that would produce the smallest standard error for each zipcode. Standard errors were extremely small- 0.03 on average, which is unsurprising since  each model was optimized based on its performance on a single zipcode rather than on a set of twenty zipcodes. 
+
+Below are predictions for 2017-2018 based on custom models compared with true values.
+
+![top 5 predictions custom](images/top_5_predictions_custom.png)
+
+And here are forecasts for 2018-2019 base on the customs models:
+
+![top 5 forecasts custom](images/top_5_forecasts_custom.png)
+
 
 ### Three Models
 
