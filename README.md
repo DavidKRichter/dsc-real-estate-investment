@@ -52,21 +52,21 @@ I decided that instead of building a different model for each zipcode, I would t
 
 ### Model Validation Process
 
-My model validation process was as follows: For each zipcode, I trained the model on the period from April 2010 through April 2017 and recorded the mean standard error for the model's predictions on the period from May 2017-April 2018. In other words, model were specifically tested for their performance over a one year period. 
+My model validation process was as follows: For each zipcode, I trained the model on the period from April 2010 through April 2017 and recorded the root mean squared error for the model's predictions on the period from May 2017-April 2018. In other words, model were specifically tested for their performance over a one year period. 
 
-To evaluate a model's overall performance I took the average standard error for all twenty zipcodes.
+To evaluate a model's overall performance I took the average RMSE for all twenty zipcodes.
 
 ### Baseline Model
 
-I first tested a baseline AR(1) Model. The model's average standard error was 0.14. Error was lowest for the high value zipcodes and highest for the zipcodes with the highest ROI First Difference. 
+I first tested a baseline AR(1) Model. The model's average RMSE was 0.14. Error was lowest for the high value zipcodes and highest for the zipcodes with the highest ROI First Difference. 
 
 ### Optimizing Features
 
-I next ran through a grid of features to find the model that minimized average standard error for all twenty zipcodes.
+I next ran through a grid of features to find the model that minimized average RMSE for all twenty zipcodes.
 
 I tested all permuations of values of p, d, and q from 0 through 2 and values of ps12 ds12 and qs12 of 0 and 1. This meant testing 216 total models on twenty different zipcodes. 
 
-The best performing model included SARIMA features (1, 1, 2)x(1, 0, 1, 12) and yielded an average Standard Error of 0.11. As with the baseline model, errors were lowest for the high value zipcodes and highest for the high First Difference zipcodes. However, error improved drastically for the high first difference zipcodes, while increasingly slightly for the high value zipcodes.
+The best performing model included SARIMA features (1, 1, 2)x(1, 0, 1, 12) and yielded an average RMSE of 0.11. As with the baseline model, errors were lowest for the high value zipcodes and highest for the high First Difference zipcodes. However, error improved drastically for the high first difference zipcodes, while increasingly slightly for the high value zipcodes.
 
 ### A Universal Model?
 
@@ -76,7 +76,7 @@ The generally low level of error for this set of features raised the possibility
 
 Since I wanted to select zipcodes that balanced high predictions with low risk, I selected the best performing zipcodes based on the lower boundary of the model's 95% confidence interval for the final forecasted date (2019-04-01). 
 
-This process took several hours, but ultimately output a list of predicted means and lower confidence intervals, of which I selected the top 5 for further analysis. For these top five zipcodes the average standard error was 0.32, much greater than the standard error of 0.11 for the twenty zipcodes previously studied. This large error was caused by a single zipcode with a standard error of 1.08. Without this high error zipcode, the model's standard error would have been 0.12. 
+This process took several hours, but ultimately output a list of predicted means and lower confidence intervals, of which I selected the top 5 for further analysis. For these top five zipcodes the average RMSE was 0.32, much greater than the standard error of 0.11 for the twenty zipcodes previously studied. This large error was caused by a single zipcode with a RMSE of 1.08. Without this high error zipcode, the model's average RMSE would have been 0.12. 
 
 Below are predictions given by the (1, 1, 2)x(1, 0, 1, 12) model for the 2017-2018 period compared with true values for that same period.
 
@@ -92,7 +92,7 @@ Because these five zipcodes were picked out specifically for their high performa
 
 ### Feature Selection 2: Custom Features
 
-For this group of five zipcodes, I then performed feature selection for each zipcode individually, using grid search on SARIMA features to determine the model that would produce the smallest standard error for each zipcode. Standard errors were extremely small- 0.03 on average, which is unsurprising since  each model was optimized based on its performance on a single zipcode rather than on a set of twenty zipcodes. 
+For this group of five zipcodes, I then performed feature selection for each zipcode individually, using grid search on SARIMA features to determine the model that would produce the smallest RMSE for each zipcode. RMSEs were extremely small- 0.03 on average, which is unsurprising since  each model was optimized based on its performance on a single zipcode rather than on a set of twenty zipcodes. 
 
 Below are predictions for 2017-2018 based on custom models compared with true values.
 
@@ -113,9 +113,9 @@ I end the study by evaluating the performance of three methods for predicting RO
 
 ### Evaluating the three models
 
-I evaluated these three models by using them to calculate first ROI and finally price predictions for April 2019 for each of the five zipcodes that I used for custom modeling. I then calculated standard error for each of these methods based off of actual median home values for April 2019 obtained through Zillow's website. 
+I evaluated these three models by using them to calculate first ROI and finally price predictions for April 2019 for each of the five zipcodes that I used for custom modeling. I then calculated RMSE for each of these methods based off of actual median home values for April 2019 obtained through Zillow's website. 
 
-It turned out that based on Zillow's 2019 data, the universal model method had the lowest standard error ($51,571), the custom model method had the highest standard error ($74,866), and the combination method had a middling standard error ($55,294).
+It turned out that based on Zillow's 2019 data, the universal model method had the lowest RMSE ($51,571), the custom model method had the highest RMSE ($74,866), and the combination method had a middling RMSE ($55,294).
 
 My conclusion was that the custom models were inferior to the universal model because they had been validated on only a single zipcode, whereas the universal model was superior because it had been validated on twenty zipcodes.
 
